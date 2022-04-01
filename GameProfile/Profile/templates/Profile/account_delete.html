@@ -1,0 +1,14 @@
+{% extends 'Profile/base.html' %}
+
+{% block content %}
+
+<form class="form" method="POST" action="">
+
+    {% csrf_token %}
+    <p>Are you sure to delete "{{ object }}"?</p>
+    <a class="btn btn--sub btn--lg  my-md" href="{% url 'account-list' %}">Go back</a>
+
+    <input class="btn btn--sub btn--lg btn btn-danger my-md" type="submit" value="Confirm"/>
+</form>
+
+{% endblock content %}

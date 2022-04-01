@@ -1,0 +1,42 @@
+{% extends 'Profile/base.html' %}
+
+{% block content %}
+
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+    <tr>
+        <td>Full Name</td>
+        <td>Address</td>
+        <td>Phone</td>
+        <td>Username</td>
+        <td>
+            <a href="{% url 'account-create' %}" class="btn btn-outline-success">
+                <i class="fas fa-plus"></i> Add new
+            </a>
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+        {% for account in accounts %}
+            <tr>
+                <td>{{account.full_name}}</td>
+                <td>{{account.address}}</td>
+                <td>{{account.phone}}</td>
+                <td>{{account.username}}</td>
+                <td>
+                    <a href="{% url 'account-edit' account.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <a href="{% url 'account-delete' account.id %}" class="d-inline">
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
