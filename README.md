@@ -1,10 +1,10 @@
 # Accounts_CRUD_Django
 
 ## Features
-Create user on create_page
-Edit user on edit_page
-Delete user on delete_page with confirmation
-Read users on read_page
+* Create user on create_page
+* Edit user on edit_page
+* Delete user on delete_page with confirmation
+* Read users on read_page
 
 ## Much more features to be coming soon.
 
