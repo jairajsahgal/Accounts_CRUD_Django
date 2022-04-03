@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Account
 from .forms import AccountForm
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializer import AccountSerializer
 
 
 # Print details of all users.
@@ -60,3 +63,54 @@ def edit(request, id):
             return redirect('account-list')
     else:
         return redirect('account-list')
+
+
+
+@api_view(['GET'])
+def accountList(request):
+    accounts = Account.objects.all()
+    serializer = AccountSerializer(data=accounts, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def accountDetail(request, pk):
+    accounts = Account.objects.get(id=id)
+    serializer = AccountSerializer(data=accounts, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def accountCreate(request):
+    serializer = AccountSerializer(instance=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def accountDelete(request, id):
+    account = Account.objects.get(id=id)
+    account.delete()
+    s = """<!DOCTYPE html>
+<html>
+   <head>
+      <title>HTML Meta Tag</title>
+      <meta http-equiv = "refresh" content = "0; url = https://www.google.com" />
+   </head>
+   <body>
+      <h1>BAAZINGA!!!</h1>
+   </body>
+</html>"""
+    return HttpResponse(s)
+
+
+@api_view(['PUT'])
+def accountUpdate(request, id):
+    account = Account.objects.get(id=id)
+    serializer = AccountSerializer(instance=account, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
