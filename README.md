@@ -9,4 +9,4 @@
 ## Much more features to be coming soon.
 
 ## Output
-[Working of program](https://github.com/jairajsahgal/Accounts_CRUD_Django/blob/master/Screenshot%202022-04-02%20at%2000-15-53%20Employee%20Register.png?raw=true)
+![Working of program](https://github.com/jairajsahgal/Accounts_CRUD_Django/blob/master/2022-04-04%2003-23-07.gif?raw=true)
