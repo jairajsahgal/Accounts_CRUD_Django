@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Account
 from .forms import AccountForm
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .serializer import AccountSerializer
-
+from django.contrib.auth import authenticate
 
 # Print details of all users.
 def list(request):
@@ -19,9 +19,7 @@ def create(request):
         context = {'form': form}
         return render(request, 'Profile/account_create.html', context=context)
     else:
-
         form = AccountForm(request.POST)
-
         if form.is_valid():
             form.save(commit=False)
             name = request.POST["full_name"]
@@ -69,20 +67,20 @@ def edit(request, id):
 @api_view(['GET'])
 def accountList(request):
     accounts = Account.objects.all()
-    serializer = AccountSerializer(data=accounts, many=True)
+    serializer = AccountSerializer(accounts, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def accountDetail(request, pk):
+def accountDetail(request, id):
     accounts = Account.objects.get(id=id)
-    serializer = AccountSerializer(data=accounts, many=False)
+    serializer = AccountSerializer(accounts, many=False)
     return Response(serializer.data)
 
 
 @api_view(['POST'])
 def accountCreate(request):
-    serializer = AccountSerializer(instance=request.data)
+    serializer = AccountSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)

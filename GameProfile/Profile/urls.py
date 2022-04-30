@@ -10,5 +10,5 @@ urlpatterns = [
     path('account-detail/<str:id>/',views.accountDetail,name="api-account-detail"),
     path('account-create/',views.accountCreate,name="api-account-create"),
     path('account-delete/<str:id>/',views.accountDelete,name="api-account-delete"),
-    path('account-delete/<str:id>/',views.accountUpdate,name="api-account-update")
+    path('account-update/<str:id>/',views.accountUpdate,name="api-account-update")
 ]
